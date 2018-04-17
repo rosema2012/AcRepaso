@@ -18,21 +18,22 @@ public class ReEjercicio1 {
     public void DividirArchivo(File f,int numLetras) throws IOException{
         FileReader fileIn = null;
         FileWriter fileOut = null;
-        BufferedWriter BufferEscritura = null;
-        BufferedReader BufferLectura = null;
-        String texto = "";
-        int num = 0;
+        String texto;
+        int num = 2;
         int i;
         try{
             fileIn = new FileReader(f);
-            while((i = fileIn.read())!= -1){
-                BufferLectura = new BufferedReader(fileIn,10);
+            char buffer [] = new char [numLetras];
+            while ((i = fileIn.read(buffer)) != -1) {
+                fileOut = new FileWriter("Archivo"+num+".txt");
+                texto = (new String(buffer,0,i));
+                //System.out.print(texto);
+                fileOut.write(texto);
+                fileOut.close();
+                num++;
             }
-                for (int j = 0; j < numLetras; j++) {
-                    fileOut = new FileWriter((num+"")+f);
-                    BufferEscritura = new BufferedWriter(fileOut,10);
-                    num++;
-                }
+            
+            
         }finally{
             if(fileOut != null){
                 fileOut.close();
@@ -46,6 +47,7 @@ public class ReEjercicio1 {
     public static void main(String[] args) throws FileNotFoundException, IOException {
         ReEjercicio1 eje1 = new ReEjercicio1();
         File f = new File("C:\\Users\\David Carrera Otero\\Documents\\NetBeansProjects\\ReEjercicio1\\src\\reejercicio1\\Archivo.txt");
-        eje1.DividirArchivo(f,10);
+        eje1.DividirArchivo(f,60);
+        
     }
 }
